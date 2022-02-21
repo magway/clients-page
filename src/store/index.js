@@ -18,7 +18,8 @@ export default createStore({
     sortOptions: [
       {value: 'fullName', name: 'by FullName'},
       {value: 'birthDate', name: 'by BirthDate'},
-    ]
+    ],
+    clientFormVisible: false,
   },
   getters: {
     currentClients(state, getters) {
@@ -65,6 +66,9 @@ export default createStore({
     setSearchDate(state, searchDate) {
       state.searchDate = searchDate
     },
+    setClientFormVisible(state, isVisible) {
+      state.clientFormVisible = isVisible;
+    }
   },
   actions: {
     setData({state, commit, getters}) {
@@ -97,6 +101,18 @@ export default createStore({
     setSearchDate({state, commit}, searchDate) {
       commit('setSearchDate', searchDate);
     },
+    setClientFormVisible({state, commit}, isVisible) {
+      commit('setClientFormVisible', isVisible)
+    },
+    addClient({state, commit, dispatch}, client) {
+      state.fakeClientsBase.push(client);
+      dispatch('setData');
+    },
+    removeClient({state, commit, dispatch}, client) {
+      state.fakeClientsBase = state.fakeClientsBase.filter( c => c.id !== client.id)
+      dispatch('setData');
+    },
+
   },
   modules: {
   }

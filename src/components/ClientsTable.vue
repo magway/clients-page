@@ -8,7 +8,6 @@
               v-for="client in clients"
               :client="client"
               :key="client.id"
-              @remove="$emit('remove', client)"
           />
           <tr>
             <td colspan="3">
